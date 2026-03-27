@@ -63,7 +63,7 @@ def get_random_value_of_type(t: Type):
             return "true"
 
     if t == Type.Int:
-        return random.randint(-500000, 500000)
+        return random.randint(-500000, -1)
 
     if t == Type.Uint:
         return random.randint(0, 1000000)
