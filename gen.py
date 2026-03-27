@@ -209,6 +209,35 @@ def non_ascii(f):
 
     print(f"Wrote file with {colsNb} cols and {rowsNb} rows")
 
+def inconsistent_types(f, start = 1):
+    rowsNb = random.randint(10, 25)
+    colsTypes = []
+    colsNb = random.randint(5, 25)
+
+    for i in range(0, colsNb):
+        colsTypes.append(get_random_type())
+        f.write(fake.word())
+        if i != colsNb - 1:
+            f.write(SEPARATOR)
+
+    f.write("\n")
+
+    for _ in range(0, start):
+        for i in range(0, colsNb):
+            f.write(str(get_random_value_of_type(colsTypes[i])))
+            if i != colsNb - 1:
+                f.write(SEPARATOR)
+        f.write("\n")
+
+    for _ in range(start, rowsNb):
+        for i in range(0, colsNb):
+            f.write(fake.word())
+            if i != colsNb - 1:
+                f.write(SEPARATOR)
+        f.write("\n")
+
+    print(f"Wrote file with {colsNb} cols and {rowsNb} rows with {start} rows with correct types")
+
 def main():
     GEN_FOLDER="generated"
 
@@ -233,6 +262,12 @@ def main():
 
     with open(f"{GEN_FOLDER}/non_ascii.csv", "w+") as f:
         non_ascii(f)
+
+    with open(f"{GEN_FOLDER}/inconsistent_types.csv", "w+") as f:
+        inconsistent_types(f)
+
+    with open(f"{GEN_FOLDER}/inconsistent_types_7.csv", "w+") as f:
+        inconsistent_types(f, 7)
 
 if __name__ == "__main__":
     main()
